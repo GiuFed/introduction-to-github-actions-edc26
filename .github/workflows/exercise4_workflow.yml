@@ -1,0 +1,28 @@
+name: Exercise 4 workflow
+run-name: Fourth workflow # Optional
+
+#events triggering the workflow
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+    workflow_dispatch:
+# Group of jobs to run as part of the workflow
+jobs:
+    runs_job:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                python-version: [3.12, 3.13, 3.14]
+                os: [windows-latest,ubuntu-latest, macos-latest]
+        steps:
+          - uses: actions/checkout@v6
+          - uses: actions/setup-python@v6
+            with:
+              python-version: ${{ matrix.python-version }}
+          - run: python -m pip install --upgrade pip
+          - run: python -m pip install -r requirements-dev.txt
+          - run: python -m black --check mycode.py
+          - run: python -m pytest test_mycode.py
+
