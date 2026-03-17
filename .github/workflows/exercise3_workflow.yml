@@ -1,5 +1,3 @@
-env :
-    MyVariable: 'This is my variable'
 name: Exercise 3 workflow
 run-name: Third workflow # Optional 
 # Events triggering the workflow
@@ -10,6 +8,8 @@ on:
         branches: [ main ]
     workflow_dispatch:
 # Group of jobs to run as part of the workflow
+env:
+    MyVariable: 'This is my variable'
 jobs:
     job_myvariable:
         runs-on: ubuntu-latest
