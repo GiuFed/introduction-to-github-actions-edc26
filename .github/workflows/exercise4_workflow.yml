@@ -1,6 +1,6 @@
 name: Exercise 4 workflow
 run-name: Fourth workflow # Optional
-
+permissions: {}
 #events triggering the workflow
 on:
     push:
@@ -11,6 +11,8 @@ on:
 # Group of jobs to run as part of the workflow
 jobs:
     runs_job:
+        permissions:
+            contents: read
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
